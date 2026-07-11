@@ -1,286 +1,261 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mzantsi Football Quiz</title>
+  <meta name="theme-color" content="#06140b" />
+  <title>SA Diski Quiz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
- 
-  <!-- ══════════════════════════════════
-       SCREEN: INTRO (Countdown — C)
-  ══════════════════════════════════ -->
-  <div class="screen active" id="screen-intro">
-    <div class="intro-bg"></div>
- 
-    <div class="intro-pitch">
-      <svg viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect id="pitch-outer" x="20" y="40" width="350" height="764"
-          stroke="rgba(76,175,80,0.22)" stroke-width="1.5" fill="none"
-          stroke-dasharray="2230" stroke-dashoffset="2230"/>
-        <line id="pitch-mid" x1="20" y1="422" x2="370" y2="422"
-          stroke="rgba(76,175,80,0.18)" stroke-width="1.5"
-          stroke-dasharray="400" stroke-dashoffset="400"/>
-        <circle id="pitch-circle" cx="195" cy="422" r="88"
-          stroke="rgba(76,175,80,0.18)" stroke-width="1.5" fill="none"
-          stroke-dasharray="554" stroke-dashoffset="554"/>
-        <circle cx="195" cy="422" r="5" fill="rgba(76,175,80,0.45)"/>
-        <rect x="120" y="40" width="150" height="60"
-          stroke="rgba(76,175,80,0.14)" stroke-width="1" fill="none"/>
-        <rect x="120" y="744" width="150" height="60"
-          stroke="rgba(76,175,80,0.14)" stroke-width="1" fill="none"/>
-        <rect x="155" y="40" width="80" height="28"
-          stroke="rgba(76,175,80,0.1)" stroke-width="1" fill="none"/>
-        <rect x="155" y="776" width="80" height="28"
-          stroke="rgba(76,175,80,0.1)" stroke-width="1" fill="none"/>
-      </svg>
+  <div class="app-shell" aria-live="polite">
+    <div class="loader" id="app-loader" aria-hidden="true">
+      <div class="loader-ball"></div>
+      <span>Preparing the pitch</span>
     </div>
- 
-    <div class="intro-top">
-      <span class="intro-brand">🇿🇦 Mzantsi Football Quiz</span>
-    </div>
- 
-    <div class="intro-ring-wrap">
-      <div class="intro-ring">
-        <svg viewBox="0 0 220 220">
-          <circle cx="110" cy="110" r="104"
-            stroke="rgba(76,175,80,0.14)" stroke-width="2" fill="none"/>
-          <circle id="progress-ring" cx="110" cy="110" r="104"
-            stroke="#4caf50" stroke-width="3.5" fill="none"
-            stroke-dasharray="654" stroke-dashoffset="654"
-            stroke-linecap="round" transform="rotate(-90 110 110)"/>
-        </svg>
-      </div>
-      <div class="intro-count" id="countdown-display">3</div>
-      <div class="intro-count-lbl" id="countdown-label">GET READY</div>
-    </div>
- 
-    <div class="intro-sub">Test Your Football Knowledge</div>
-    <button class="intro-btn" id="intro-btn" onclick="App.goHome()">KICK OFF</button>
-  </div>
- 
- 
-  <!-- ══════════════════════════════════
-       SCREEN: HOME
-  ══════════════════════════════════ -->
-  <div class="screen" id="screen-home">
-    <div class="home-bg"></div>
-    <div class="topbar">
-      <div class="topbar-brand">🇿🇦 Mzantsi Football Quiz</div>
-      <div class="topbar-avatar" id="home-avatar">LS</div>
-    </div>
-    <div class="home-hero">
-      <p class="home-greet" id="home-greet">Good evening, Legend</p>
-      <h1 class="home-headline">Choose<br>Your Mode</h1>
-      <div class="streak-badge">
-        <span class="streak-icon">🔥</span>
-        <span class="streak-txt" id="streak-txt">7-day streak</span>
-      </div>
-    </div>
-    <p class="modes-label">Game Modes</p>
-    <div class="modes-grid">
-      <div class="mode-card active" onclick="App.startMode('trivia')">
-        <div class="mode-icon green">Q</div>
-        <div class="mode-name">Trivia Quiz</div>
-        <div class="mode-xp">+50 XP per round</div>
-      </div>
-      <div class="mode-card" onclick="App.startMode('player')">
-        <span class="mode-badge red">HOT</span>
-        <div class="mode-icon red">?</div>
-        <div class="mode-name">Guess Player</div>
-        <div class="mode-xp">+80 XP per round</div>
-      </div>
-      <div class="mode-card" onclick="App.startMode('lineup')">
-        <div class="mode-icon blue" style="font-size:13px">XI</div>
-        <div class="mode-name">Missing Lineup</div>
-        <div class="mode-xp">+60 XP per round</div>
-      </div>
-      <div class="mode-card" onclick="App.startMode('career')">
-        <div class="mode-icon amber">→</div>
-        <div class="mode-name">Career Path</div>
-        <div class="mode-xp">+70 XP per round</div>
-      </div>
-      <div class="mode-card" onclick="App.startMode('stadium')">
-        <div class="mode-icon gray" style="font-size:12px">STD</div>
-        <div class="mode-name">SA Stadiums</div>
-        <div class="mode-xp">+40 XP per round</div>
-      </div>
-      <div class="mode-card" onclick="App.startMode('tactical')">
-        <span class="mode-badge blue">NEW</span>
-        <div class="mode-icon navy" style="font-size:11px">TAC</div>
-        <div class="mode-name">Tactical Mode</div>
-        <div class="mode-xp">+90 XP per round</div>
-      </div>
-    </div>
-    <div class="home-bottom">
-      <button class="primary-btn" onclick="App.startMode('trivia')">START PLAYING</button>
-      <div class="daily-bar">
-        <div class="daily-left">
-          <span class="daily-label">Daily Challenge</span>
-          <span class="daily-val" id="daily-val">3 / 5 done</span>
+
+    <section class="screen active auth-screen" id="screen-auth">
+      <div class="pitch-grid"></div>
+      <div class="auth-panel">
+        <div class="brand-lockup">
+          <span class="brand-mark">SA</span>
+          <div>
+            <p class="eyebrow">Diski Match Centre</p>
+            <h1>SA Diski Quiz</h1>
+          </div>
         </div>
-        <div class="daily-track"><div class="daily-fill" id="daily-fill" style="width:60%"></div></div>
+
+        <div class="auth-copy">
+          <p class="auth-kicker">Kick off your session</p>
+          <h2 id="auth-title">Welcome back</h2>
+          <p id="auth-subtitle">Log in to keep your streak, XP and quiz progress ready.</p>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+          <button class="auth-tab active" id="login-tab" type="button" role="tab" aria-selected="true" onclick="Auth.switchMode('login')">Log in</button>
+          <button class="auth-tab" id="signup-tab" type="button" role="tab" aria-selected="false" onclick="Auth.switchMode('signup')">Sign up</button>
+        </div>
+
+        <form class="auth-form" id="auth-form" novalidate>
+          <label class="field signup-only" for="name-input">
+            <span>Display name</span>
+            <input id="name-input" name="name" type="text" autocomplete="name" placeholder="Lebo Striker" />
+            <small class="field-error" id="name-error"></small>
+          </label>
+
+          <label class="field" for="email-input">
+            <span>Email</span>
+            <input id="email-input" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            <small class="field-error" id="email-error"></small>
+          </label>
+
+          <label class="field" for="password-input">
+            <span>Password</span>
+            <div class="password-wrap">
+              <input id="password-input" name="password" type="password" autocomplete="current-password" placeholder="At least 6 characters" required />
+              <button class="password-toggle" type="button" aria-label="Show password" onclick="Auth.togglePassword('password-input', this)">Show</button>
+            </div>
+            <small class="field-error" id="password-error"></small>
+          </label>
+
+          <label class="field signup-only" for="confirm-input">
+            <span>Confirm password</span>
+            <div class="password-wrap">
+              <input id="confirm-input" name="confirm" type="password" autocomplete="new-password" placeholder="Repeat password" />
+              <button class="password-toggle" type="button" aria-label="Show password" onclick="Auth.togglePassword('confirm-input', this)">Show</button>
+            </div>
+            <small class="field-error" id="confirm-error"></small>
+          </label>
+
+          <div class="auth-row">
+            <label class="check-row">
+              <input id="remember-input" name="remember" type="checkbox" />
+              <span>Remember me</span>
+            </label>
+            <button class="link-btn" type="button">Reset password</button>
+          </div>
+
+          <button class="primary-btn auth-submit" id="auth-submit" type="submit">Enter Stadium</button>
+          <p class="auth-note" id="auth-note">New here? Sign up to build your Diski profile.</p>
+        </form>
       </div>
-    </div>
-  </div>
- 
- 
-  <!-- ══════════════════════════════════
-       SCREEN: PLAYER MODE INTRO (D)
-  ══════════════════════════════════ -->
-  <div class="screen" id="screen-player-intro">
-    <div class="player-intro-bg"></div>
-    <div class="player-spotlight"></div>
-    <div class="player-spotlight-2"></div>
- 
-    <div class="player-figure">
-      <svg width="120" height="200" viewBox="0 0 120 200" fill="none">
-        <circle cx="60" cy="24" r="20" fill="rgba(255,255,255,0.88)"/>
-        <rect x="36" y="46" width="48" height="68" rx="8" fill="#2d7a3a"/>
-        <rect x="18" y="52" width="20" height="50" rx="6" fill="#2d7a3a"/>
-        <rect x="82" y="52" width="20" height="50" rx="6" fill="#2d7a3a"/>
-        <text x="60" y="88" text-anchor="middle" font-family="Barlow,sans-serif" font-size="20" font-weight="800" fill="white">10</text>
-        <rect x="36" y="114" width="20" height="70" rx="6" fill="#1a3a22"/>
-        <rect x="64" y="114" width="20" height="70" rx="6" fill="#1a3a22"/>
-        <rect x="30" y="180" width="28" height="16" rx="4" fill="#111"/>
-        <rect x="62" y="180" width="28" height="16" rx="4" fill="#111"/>
-      </svg>
-    </div>
-    <div class="player-ball">
-      <svg width="32" height="32" viewBox="0 0 32 32">
-        <circle cx="16" cy="16" r="15" fill="#f0f0f0" stroke="#ddd" stroke-width="0.8"/>
-        <polygon points="16,4 20,11 15,13 11,8" fill="#222"/>
-        <polygon points="27,11 30,17 25,20 21,16 23,10" fill="#222"/>
-        <polygon points="5,11 9,10 11,16 7,20 2,17" fill="#222"/>
-        <polygon points="16,28 11,22 13,17 19,17 21,22" fill="#222"/>
-      </svg>
-    </div>
-    <div class="player-ground-line"></div>
-    <h2 class="player-intro-title">GUESS THE PLAYER</h2>
-    <p class="player-intro-sub">Mzantsi Football Quiz</p>
-    <div class="player-intro-accent"></div>
-    <button class="intro-btn player-kick" onclick="App.startGuessPlayer()">KICK OFF</button>
-  </div>
- 
- 
-  <!-- ══════════════════════════════════
-       SCREEN: TACTICAL MODE INTRO (E)
-  ══════════════════════════════════ -->
-  <div class="screen" id="screen-tactical-intro">
-    <div class="tac-bg"></div>
-    <div class="tac-pitch">
-      <svg viewBox="0 0 390 844" fill="none" style="position:absolute;inset:0;width:100%;height:100%">
-        <rect x="8" y="20" width="374" height="804" stroke="rgba(55,138,221,0.12)" stroke-width="1" fill="none"/>
-        <line x1="8" y1="422" x2="382" y2="422" stroke="rgba(55,138,221,0.1)" stroke-width="1"/>
-        <circle cx="195" cy="422" r="90" stroke="rgba(55,138,221,0.1)" stroke-width="1" fill="none"/>
-        <line x1="8" y1="230" x2="382" y2="230" stroke="rgba(55,138,221,0.06)" stroke-width="1"/>
-        <line x1="8" y1="614" x2="382" y2="614" stroke="rgba(55,138,221,0.06)" stroke-width="1"/>
-      </svg>
-    </div>
-    <div class="tac-radar">
-      <svg viewBox="0 0 260 260" style="width:260px;height:260px">
-        <circle cx="130" cy="130" r="126" stroke="#378ADD" stroke-width="0.8" fill="none"/>
-        <circle cx="130" cy="130" r="84" stroke="#378ADD" stroke-width="0.8" fill="none"/>
-        <circle cx="130" cy="130" r="42" stroke="#378ADD" stroke-width="0.8" fill="none"/>
-        <line class="radar-line" x1="130" y1="130" x2="130" y2="4" stroke="#4caf50" stroke-width="2" style="transform-origin:130px 130px"/>
-        <path d="M130 130 L130 4 A126 126 0 0 1 256 130 Z" fill="rgba(76,175,80,0.06)"/>
-      </svg>
-    </div>
-    <div class="tac-dots" id="tac-dots"></div>
-    <div class="tac-hex">
-      <svg width="160" height="185" viewBox="0 0 160 185" fill="none">
-        <polygon points="80,4 156,44 156,140 80,180 4,140 4,44"
-          stroke="#378ADD" stroke-width="2" fill="rgba(33,150,243,0.07)"/>
-        <polygon points="80,26 134,56 134,124 80,154 26,124 26,56"
-          stroke="#378ADD" stroke-width="1" fill="rgba(33,150,243,0.04)"/>
-        <text x="80" y="102" text-anchor="middle"
-          font-family="'Bebas Neue',sans-serif" font-size="32" fill="#378ADD" letter-spacing="2">TACTICS</text>
-        <text x="80" y="74" text-anchor="middle"
-          font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(255,255,255,0.5)" letter-spacing="4">MFQ</text>
-      </svg>
-    </div>
-    <div class="tac-top-title">Mzantsi Football Quiz</div>
-    <div class="tac-sub">Tactical Intelligence</div>
-    <div class="tac-formation">4 — 3 — 3</div>
-    <button class="intro-btn tac-kick" onclick="App.startTactical()">KICK OFF</button>
-  </div>
- 
- 
-  <!-- ══════════════════════════════════
-       SCREEN: TRIVIA QUIZ
-  ══════════════════════════════════ -->
-  <div class="screen" id="screen-trivia">
-    <div class="quiz-topbar">
-      <button class="back-btn" onclick="App.goHome()">← Back</button>
-      <div class="quiz-timer">Time: <span class="timer-num" id="timer-display">15s</span></div>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="quiz-progress"></div></div>
-    <div class="quiz-meta">
-      <span id="quiz-meta-q">Q1 of 8</span>
-      <span id="quiz-meta-score">Score: 0</span>
-    </div>
-    <div class="quiz-question" id="quiz-question">Loading question...</div>
-    <div class="quiz-options" id="quiz-options"></div>
-    <div class="quiz-feedback" id="quiz-feedback"></div>
-    <button class="primary-btn quiz-next" id="quiz-next" onclick="App.nextQuestion()" style="display:none">NEXT QUESTION</button>
-  </div>
- 
- 
-  <!-- ══════════════════════════════════
-       SCREEN: GUESS PLAYER
-  ══════════════════════════════════ -->
-  <div class="screen" id="screen-player">
-    <div class="quiz-topbar dark">
-      <button class="back-btn green" onclick="App.goHome()">← Back</button>
-      <span class="quiz-meta-dark" id="player-meta">Score: 0 · Round 1</span>
-    </div>
-    <div class="player-stage">
-      <div class="player-silhouette" id="player-silhouette">
-        <svg width="140" height="200" viewBox="0 0 140 200" fill="none">
-          <circle cx="70" cy="24" r="20" fill="#1a1a1a"/>
-          <rect x="44" y="46" width="52" height="68" rx="8" fill="#1a1a1a"/>
-          <rect x="26" y="52" width="20" height="50" rx="6" fill="#1a1a1a"/>
-          <rect x="94" y="52" width="20" height="50" rx="6" fill="#1a1a1a"/>
-          <rect x="44" y="114" width="22" height="68" rx="6" fill="#1a1a1a"/>
-          <rect x="74" y="114" width="22" height="68" rx="6" fill="#1a1a1a"/>
-          <circle cx="96" cy="120" r="16" fill="#1a1a1a"/>
-          <text x="70" y="88" text-anchor="middle" font-family="Barlow,sans-serif" font-size="20" font-weight="800" fill="#333">?</text>
-        </svg>
+      <aside class="auth-preview" aria-label="Quiz preview">
+        <div class="score-card mini-card">
+          <span>XP Bank</span>
+          <strong id="auth-xp">1840</strong>
+        </div>
+        <div class="stadium-card mini-card">
+          <span>Today</span>
+          <strong>Derby quiz live</strong>
+        </div>
+      </aside>
+    </section>
+
+    <section class="screen intro-screen" id="screen-intro">
+      <div class="pitch-grid"></div>
+      <div class="intro-top">
+        <span class="brand-mark small">SA</span>
+        <span>SA Diski Quiz</span>
       </div>
-      <div class="player-clues" id="player-clues"></div>
-      <p class="player-question">Who is this player?</p>
-      <div class="player-options" id="player-options"></div>
-    </div>
-  </div>
- 
- 
-  <!-- ══════════════════════════════════
-       SCREEN: RESULTS
-  ══════════════════════════════════ -->
-  <div class="screen" id="screen-results">
-    <div class="home-bg"></div>
-    <div class="results-inner">
-      <div class="results-trophy">🏆</div>
-      <h2 class="results-title">Full Time!</h2>
-      <p class="results-subtitle" id="results-subtitle">PSL Trivia · Round 1</p>
-      <div class="results-score" id="results-score">0</div>
-      <p class="results-max" id="results-max">out of 8 correct</p>
-      <div class="results-stats">
-        <div class="results-stat"><div class="rs-num" id="res-accuracy">0%</div><div class="rs-lbl">Accuracy</div></div>
-        <div class="results-stat"><div class="rs-num" id="res-time">0s</div><div class="rs-lbl">Avg Time</div></div>
-        <div class="results-stat"><div class="rs-num" id="res-streak">0</div><div class="rs-lbl">Streak</div></div>
+      <div class="intro-ring-wrap">
+        <div class="intro-ring">
+          <svg viewBox="0 0 220 220" aria-hidden="true">
+            <circle cx="110" cy="110" r="104" class="ring-bg" />
+            <circle id="progress-ring" cx="110" cy="110" r="104" class="ring-fg" transform="rotate(-90 110 110)" />
+          </svg>
+        </div>
+        <div class="intro-count" id="countdown-display">3</div>
+        <div class="intro-count-lbl" id="countdown-label">Get ready</div>
       </div>
-      <div class="results-xp"><span class="xp-star">⭐</span><span class="xp-txt" id="res-xp">+0 XP earned!</span></div>
-      <div class="results-actions">
-        <button class="primary-btn" onclick="App.playAgain()">PLAY AGAIN</button>
-        <button class="secondary-btn" onclick="App.goHome()">HOME</button>
-      </div>
-    </div>
+      <p class="intro-sub">South African football knowledge, matchday pace.</p>
+      <button class="intro-btn" id="intro-btn" type="button" onclick="App.goHome()">Kick Off</button>
+    </section>
+
+    <section class="screen home-screen" id="screen-home">
+      <div class="pitch-grid"></div>
+      <header class="topbar">
+        <div class="topbar-brand"><span class="brand-mark small">SA</span><span>Diski Quiz</span></div>
+        <nav class="topnav" aria-label="Primary">
+          <button type="button" onclick="App.goHome()">Modes</button>
+          <button type="button" onclick="App.showProfile()">Profile</button>
+          <button type="button" onclick="Auth.logout()">Logout</button>
+        </nav>
+        <button class="topbar-avatar" id="home-avatar" type="button" onclick="App.showProfile()">LS</button>
+      </header>
+
+      <main class="home-layout">
+        <section class="home-hero">
+          <p class="home-greet" id="home-greet">Good evening, Legend</p>
+          <h2>Pick your match mode</h2>
+          <p>Fast questions, slick clues and SA football energy from the first whistle.</p>
+          <div class="hero-stats">
+            <div><span id="streak-txt">7-day streak</span><small>Current form</small></div>
+            <div><span id="xp-txt">1840 XP</span><small>Club points</small></div>
+            <div><span id="daily-val">3 / 5 done</span><small>Daily run</small></div>
+          </div>
+        </section>
+
+        <section class="modes-section" aria-label="Game modes">
+          <div class="section-heading">
+            <p class="eyebrow">Game Modes</p>
+            <span class="daily-track"><span class="daily-fill" id="daily-fill" style="width:60%"></span></span>
+          </div>
+          <div class="modes-grid">
+            <button class="mode-card active" type="button" onclick="App.startMode('trivia')">
+              <span class="mode-icon green">Q</span><span class="mode-name">Trivia Quiz</span><span class="mode-xp">+50 XP per round</span>
+            </button>
+            <button class="mode-card" type="button" onclick="App.startMode('player')">
+              <span class="mode-badge red">HOT</span><span class="mode-icon red">?</span><span class="mode-name">Guess Player</span><span class="mode-xp">+80 XP per round</span>
+            </button>
+            <button class="mode-card" type="button" onclick="App.startMode('lineup')">
+              <span class="mode-icon blue">XI</span><span class="mode-name">Missing Lineup</span><span class="mode-xp">+60 XP per round</span>
+            </button>
+            <button class="mode-card" type="button" onclick="App.startMode('career')">
+              <span class="mode-icon amber">CP</span><span class="mode-name">Career Path</span><span class="mode-xp">+70 XP per round</span>
+            </button>
+            <button class="mode-card" type="button" onclick="App.startMode('stadium')">
+              <span class="mode-icon gray">STD</span><span class="mode-name">SA Stadiums</span><span class="mode-xp">+40 XP per round</span>
+            </button>
+            <button class="mode-card" type="button" onclick="App.startMode('worldcup')">
+              <span class="mode-badge blue">CUP</span><span class="mode-icon gold">WC</span><span class="mode-name">World Cup Edition</span><span class="mode-xp">+100 XP per round</span>
+            </button>            <button class="mode-card" type="button" onclick="App.startMode('tactical')">
+              <span class="mode-badge blue">NEW</span><span class="mode-icon navy">TAC</span><span class="mode-name">Tactical Mode</span><span class="mode-xp">+90 XP per round</span>
+            </button>
+          </div>
+        </section>
+      </main>
+      <footer class="home-cta"><button class="primary-btn" type="button" onclick="App.startMode('trivia')">Start Playing</button></footer>
+    </section>
+
+    <section class="screen player-intro-screen" id="screen-player-intro">
+      <div class="stadium-lights"></div>
+      <div class="kit-runner" aria-hidden="true"><span class="kit-number">10</span></div>
+      <h2>Guess The Player</h2>
+      <p>Read the clues, trust your ball knowledge, choose before the crowd does.</p>
+      <button class="intro-btn player-kick" type="button" onclick="App.startGuessPlayer()">Kick Off</button>
+    </section>
+
+    <section class="screen tactical-screen" id="screen-tactical-intro">
+      <div class="tac-pitch"></div>
+      <div class="tac-dots" id="tac-dots"></div>
+      <div class="tac-board"><span>4-3-3</span><strong>Tactical Mode</strong></div>
+      <button class="intro-btn tac-kick" type="button" onclick="App.startTactical()">Kick Off</button>
+    </section>
+
+    <section class="screen quiz-screen" id="screen-trivia">
+      <header class="quiz-topbar">
+        <button class="back-btn" type="button" onclick="App.goHome()">Back</button>
+        <div class="quiz-timer">Shot clock <span class="timer-num" id="timer-display">15s</span></div>
+      </header>
+      <div class="progress-track"><div class="progress-fill" id="quiz-progress"></div></div>
+      <main class="quiz-card">
+        <div class="quiz-meta"><span id="quiz-meta-q">Q1 of 8</span><span id="quiz-meta-score">Score: 0</span></div>
+        <h2 class="quiz-question" id="quiz-question">Loading question...</h2>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+        <button class="primary-btn quiz-next" id="quiz-next" type="button" onclick="App.nextQuestion()" style="display:none">Next Question</button>
+      </main>
+    </section>
+
+    <section class="screen player-screen" id="screen-player">
+      <header class="quiz-topbar dark">
+        <button class="back-btn green" type="button" onclick="App.goHome()">Back</button>
+        <span class="quiz-meta-dark" id="player-meta">Score: 0 · Round 1</span>
+      </header>
+      <main class="player-stage">
+        <div class="player-silhouette" id="player-silhouette" aria-hidden="true">
+          <div class="jersey-card mystery"><span class="jersey-number" id="jersey-number">10</span><span class="jersey-name" id="jersey-name">PLAYER</span></div>
+        </div>
+        <div class="player-clues" id="player-clues"></div>
+        <p class="player-question">Who owns this shirt?</p>
+        <div class="player-options" id="player-options"></div>
+      </main>
+    </section>
+
+
+    <section class="screen challenge-screen" id="screen-challenge">
+      <div class="pitch-grid"></div>
+      <header class="quiz-topbar dark">
+        <button class="back-btn green" type="button" onclick="App.goHome()">Back</button>
+        <span class="quiz-meta-dark" id="challenge-meta">Score: 0 - Round 1</span>
+      </header>
+      <main class="challenge-layout">
+        <section class="challenge-visual" id="challenge-visual" aria-label="Mode visual"></section>
+        <section class="challenge-panel">
+          <p class="eyebrow" id="challenge-mode-label">Mode</p>
+          <h2 id="challenge-question">Loading challenge...</h2>
+          <div class="challenge-clues" id="challenge-clues"></div>
+          <div class="challenge-options" id="challenge-options"></div>
+          <div class="quiz-feedback" id="challenge-feedback"></div>
+        </section>
+      </main>
+    </section>
+    <section class="screen results-screen" id="screen-results">
+      <div class="pitch-grid"></div>
+      <main class="results-inner">
+        <div class="results-trophy">Cup</div>
+        <h2 class="results-title">Full Time</h2>
+        <p class="results-subtitle" id="results-subtitle">PSL Trivia · Round 1</p>
+        <div class="results-score" id="results-score">0</div>
+        <p class="results-max" id="results-max">out of 8 correct</p>
+        <div class="results-stats">
+          <div class="results-stat"><div class="rs-num" id="res-accuracy">0%</div><div class="rs-lbl">Accuracy</div></div>
+          <div class="results-stat"><div class="rs-num" id="res-time">0s</div><div class="rs-lbl">Avg Time</div></div>
+          <div class="results-stat"><div class="rs-num" id="res-streak">0</div><div class="rs-lbl">Streak</div></div>
+        </div>
+        <div class="results-xp"><span id="res-xp">+0 XP earned</span></div>
+        <div class="results-actions">
+          <button class="primary-btn" type="button" onclick="App.playAgain()">Play Again</button>
+          <button class="secondary-btn" type="button" onclick="App.goHome()">Home</button>
+        </div>
+      </main>
+    </section>
   </div>
- 
   <script src="app.js"></script>
 </body>
 </html>
+
+
